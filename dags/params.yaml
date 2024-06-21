@@ -1,0 +1,10 @@
+preprocess:
+  raw_data_path: raw
+  processed_data_path: processed
+
+train:
+  data_path: processed
+  model_path: models/model.h5
+
+deploy:
+  model_path: models/model.h5

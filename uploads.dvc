@@ -1,0 +1,6 @@
+outs:
+- md5: 191d22d6b3ea9407f2fe2608c4a39275.dir
+  size: 375962
+  nfiles: 4
+  hash: md5
+  path: uploads

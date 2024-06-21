@@ -1,0 +1,9 @@
+[core]
+    no_scm = True
+    remote = myremote
+['remote "mygdrive"']
+    url = gdrive://1dbU51GbcixId8BfgPMSG9q-nLO_qZElt
+    gdrive_use_service_account = true
+    gdrive_service_account_json_file_path = ../gdrive-user-credentials.json
+['remote "myremote"']
+    url = gdrive://1hXPuqiD9dNWBuZWQVpvZDfQ6QhqeTDql
