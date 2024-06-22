@@ -11,25 +11,21 @@ RUN apt-get update \
     && apt-get clean
 
 COPY gdrive-user-credentials.json /opt/airflow/gdrive-user-credentials.json
-COPY imagery /opt/airflow/imagery
-COPY test-dataset /opt/airflow/test-dataset
-COPY models /opt/airflow/models
-COPY imagery.dvc /opt/airflow/imagery.dvc
+COPY uploads /opt/airflow/uploads
+COPY uploads.dvc /opt/airflow/uploads.dvc
 
 # Set permissions for the imagery directory and imagery.dvc
-RUN chown -R airflow:airflow /opt/airflow/imagery \
-    && chmod 755 /opt/airflow/imagery \
-    && chown -R airflow:airflow /opt/airflow/models \
-    && chmod 755 /opt/airflow/models \
-    && chown airflow:airflow /opt/airflow/imagery.dvc \
-    && chmod 644 /opt/airflow/imagery.dvc
+RUN chown -R airflow:airflow /opt/airflow/uploads \
+    && chmod 755 /opt/airflow/uploads \
+    && chown airflow:airflow /opt/airflow/uploads.dvc \
+    && chmod 644 /opt/airflow/uploads.dvc
 
 # Install PyTorch, torchvision, and torchaudio for CPU usage
 USER airflow
 
-
-# Install MLflow and DVC with Google Drive support
-RUN pip install mlflow dvc-gdrive dvc
+# Install specific version of TensorFlow along with MLflow, DVC, and other required packages
+RUN pip install --upgrade pip && \
+    pip install mlflow dvc-gdrive dvc tensorflow==2.12 scikit-learn numpy
 
 # Set environment variable for DVC to find GDrive credentials
 ENV GDRIVE_USER_CREDENTIALS_DATA=/opt/airflow/gdrive-user-credentials.json

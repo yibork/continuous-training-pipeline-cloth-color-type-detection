@@ -18,4 +18,15 @@ async def upload_image(file: UploadFile = File(...)):
     with file_path.open("wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    return {"message": "Image uploaded successfully."}
+    # Add the uploaded file to DVC
+    os.system(f"dvc add {file_path}")
+
+    # Push the uploaded file to DVC
+    os.system("dvc push")
+
+    # Commit and push the uploads.dvc file to GitHub
+    # os.system("git add uploads.dvc")
+    # os.system("git commit -m 'Add uploads.dvc'")
+    # os.system("git push")
+
+    return {"message": "Image uploaded and pushed to DVC successfully."}
