@@ -2,3 +2,5 @@ fastapi
 uvicorn
 dvc
 dvc-gdrive
+tensorflow
+keras
